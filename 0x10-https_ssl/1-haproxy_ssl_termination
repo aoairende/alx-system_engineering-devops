@@ -33,18 +33,18 @@ defaults
 	errorfile 503 /etc/haproxy/errors/503.http
 	errorfile 504 /etc/haproxy/errors/504.http
 
-frontend  ridhwan-frontend-http
+frontend  www-http
         bind *:80
         mode http
 		http-request set-header X-Forwarded-Proto http
-        default_backend drkgaphar-backend
+        default_backend www-backend
 
-frontend ridhwan-frontend-https
-	bind *:443 ssl crt /etc/haproxy/certs/drkgaphar.tech.pem
+frontend www-https
+	bind *:443 ssl crt /etc/letsencrypt/live/www.ac3.tech/fullchain.pem
 	http-request set-header X-Forwarded-Proto https
-	default_backend drkgaphar-backend
+	default_backend www-backend
 
-backend ridhwan-backend
+backend www-backend
         balance roundrobin
-        server 76716-web-02 54.237.210.122:80 check
-        server 76716-web-01 54.160.78.126:80 check
+        server 301588-web-02 52.87.219.132:80 check
+        server 301588-web-01 100.26.235.93:80 check
